@@ -1,0 +1,22 @@
+{
+  "name": "crud_mongodb",
+  "version": "1.0.0",
+  "description": "Tutorial MongoDB",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HubOpsVitor/CRUD_MongoDB.git"
+  },
+  "author": "Allan Vítor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HubOpsVitor/CRUD_MongoDB/issues"
+  },
+  "homepage": "https://github.com/HubOpsVitor/CRUD_MongoDB#readme",
+  "dependencies": {
+    "mongoose": "^8.12.1"
+  }
+}
