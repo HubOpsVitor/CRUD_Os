@@ -8,21 +8,21 @@
 const { conectar, desconectar } = require('./database.js')
 
 // Importação do modelo de dados da OS
-const ordemServicoModel = require('./src/models/OrdemServico.js')
+const ordemServicoModel = require('./src/models/OS.js')
 
 // Função para cadastrar uma nova OS
-const salvarOS = async (numeroOS, nomeCli, foneCli, cpfCli, equipamento, numeroSerie, problemaRelatado, tecnico, valor) => {
+const salvarOS = async (numeroOS, nomeCli, foneCli, cpfCli, equipamentoCli, numeroSerieCli, problemaCli, tecnicoCli, valorCli) => {
     try {
         const novaOS = new ordemServicoModel({
             numeroOS,
             nomeCliente: nomeCli,
             foneCliente: foneCli,
             cpf: cpfCli,
-            equipamento,
-            numeroSerie,
-            problemaRelatado,
-            tecnico,
-            valor
+            equipamento: equipamentoCli,
+            numeroSerie: numeroSerieCli,
+            problemaRelatado: problemaCli,
+            tecnico: tecnicoCli,
+            valor: valorCli
         })
         await novaOS.save()
         console.log("Ordem de Serviço cadastrada com sucesso!")
@@ -62,12 +62,18 @@ const buscarOSPorCPF = async (cpf) => {
 }
 
 // Função para atualizar uma OS (usando o ID)
-const atualizarOS = async (id, statusOS, diagnosticoTecnico, tecnico, valor) => {
+const atualizarOS = async (id, nomeCliente, foneCliente, cpf, statusOS, equipamento, numeroSerie, problemaRelatado, diagnosticoTecnico, tecnico, valor) => {
     try {
         const osAtualizada = await ordemServicoModel.findByIdAndUpdate(
             id,
             {
+                nomeCliente,
+                foneCliente,
+                cpf,
                 statusOS,
+                equipamento,
+                numeroSerie,
+                problemaRelatado,
                 diagnosticoTecnico,
                 tecnico,
                 valor
@@ -102,43 +108,46 @@ const iniciarSistema = async () => {
     await conectar()
 
     // CRUD Create (inserção no banco de dados)
-    await salvarOS(
-        "OS005",               // numeroOS
-        "Leandro Ramos",       // nomeCliente
-        "99999-1234",          // foneCliente
-        "12345678912",         // cpf
-        "Fechada",              // statusOS
-        "Playstation 4",       // equipamento
-        "D54321",              // numeroSerie
-        "Fazendo muito barulho", // problemaRelatado
-        380         // valor 
+    /* await salvarOS(
+        "OS011",                     // numeroOS
+        "Joana Silva",              // nomeCliente
+        "11988887777",              // foneCliente
+        "12345678901",              // cpf
+        "Em andamento",            // statusOS
+        "Notebook Dell Inspiron",  // equipamento
+        "SN12345XYZ",              // numeroSerie
+        "Tela nao liga",           // problemaRelatado
+        "10",   // diagnosticoTecnico
+        "Carlos Henrique",         // tecnico
+        450                         // valor
+    ); */
 
-    );
 
 
     // CRUD Read (listar todas as OS)
-    // await listarOS()
+    //await listarOS()
 
     // CRUD Read (buscar OS pelo número)
-    // await buscarOSPorNumero("OS001")
+    //await buscarOSPorNumero("OS011")
 
     // CRUD Read (buscar OS pelo CPF do cliente)
     // await buscarOSPorCPF("12345678905")
 
     // CRUD Update (atualizar OS)
-    /* await atualizarOS(
-
-        "67e45f12e2246cb8a5d87b9a",
-        "Finalizada",               // numeroOS
-        "Leandro Pereira Ramos",       // nomeCliente
-        "99999-1234",          // foneCliente
-        "12345678912",         // cpf
-        "Fechada",             // statusOS
-        "Playstation 4",       // equipamento
-        "D54321",              // numeroSerie
-        "Fazendo muito barulho", // problemaRelatado
-        380                    // valor
-    ); */
+   /* await atualizarOS(
+ 
+         "67f6c6f3418ecf56fda88980",
+         "Maria Silva",              // nomeCliente
+         "11988887777",              // foneCliente
+         "12345678901",              // cpf
+         "Finalizada",            // statusOS
+         "Notebook Dell Inspiron",  // equipamento
+         "SN12345XYZ",              // numeroSerie
+         "Tela nao liga",           // problemaRelatado
+         "Precisa trocar a placa",                      // diagnosticoTecnico
+         "Vitor Silva",         // tecnico
+         450                         // valor
+     ); */
 
 
 
